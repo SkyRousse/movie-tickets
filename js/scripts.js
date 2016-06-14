@@ -9,7 +9,11 @@ function Ticket(age, price, time, movie) {
 }
 
 Ticket.prototype.priceCalculator = function() {
-  if ( this.age >= 55 ) {
+  if ( this.age >= 55 && this.time === 1 ) {
+    basePrice -= 8;
+  } else if ( this.age <= 12 && this.time === 1 ) {
+    basePrice -= 6;
+  } else if ( this.age >= 55 ) {
     basePrice -= 4;
   } else if ( this.age <= 12 ) {
     basePrice -= 2;
@@ -29,7 +33,8 @@ $(document).ready(function() {
 
     myTicket = new Ticket(inputtedAge, basePrice, inputtedTime, inputtedMovie);
     myTicket.priceCalculator();
-    alert(basePrice);
+    $("#output").append("<h4>" + myTicket.movie + " " + myTicket.price + "</h4>");
+    $("#img-ouput").append("<img src='img/" + myTicket.movie + ".jpg'>");
   });
 
 });
